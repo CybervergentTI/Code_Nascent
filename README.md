@@ -5,10 +5,10 @@ from google.colab import drive
 drive.mount('/content/drive')
 
 
-#This cell code defines the target folder path, lists the files in the folder, and prints the result present in the specified folder.
+=> This cell code defines the target folder path, lists the files in the folder, and prints the result present in the specified folder..
 
 
-=> import os
+import os
 
 drive_folder_path = '/content/drive/MyDrive/Weekly'
 
