@@ -4,6 +4,7 @@ from collections import defaultdict
 from datetime import datetime
 import os
 import fitz  # Import PyMuPDF
+import shutil # Import shutil for file operations
 
 def parse_report_file(filename, content):
     """Parse a single report file and extract data from all 9 tables by scanning for keywords."""
@@ -343,6 +344,19 @@ def main():
 
         print(f"\n✓ Monthly Report Document generated successfully!")
         print(f"✓ Report saved to '{output_path}'")
+
+        # Save the notebook to the specified Google Drive folder
+        notebook_path = '/content/drive/MyDrive/Weekly/Security_Reports_Aggregator_Notebook.ipynb' # Define notebook path in Drive
+        # Get current notebook path using a shell command
+        current_notebook_path = !echo "$PWD" | sed 's/content/fileid=/'
+        current_notebook_path = current_notebook_path[0] + '/drive/MyDrive/' + os.path.basename(os.getcwd()) + '.ipynb'
+
+        try:
+            shutil.copy2(current_notebook_path, notebook_path)
+            print(f"✓ Notebook saved successfully to '{notebook_path}'")
+        except Exception as e:
+            print(f"Error saving notebook: {str(e)}")
+
 
         # Display summary
         print(f"\nSUMMARY:")
